@@ -1,0 +1,34 @@
+{
+  "schema_version": "vllm-hust-mod-metadata-v1",
+  "mod_id": "org.vllm-hust.stateaxis-prefix-cache-policy",
+  "repository": "stateaxis-prefix-cache-policy",
+  "display_name": "StateAxis Prefix Cache Policy",
+  "canonical_repository": "pending local candidate",
+  "responsibility": {
+    "organization": "vLLM-HUST",
+    "maintainers": [
+      {"name": "Shuhao Zhang (Tony)", "github": "ShuhaoZhangTony"}
+    ],
+    "advisor_status": "none",
+    "advisors": []
+  },
+  "lifecycle": {
+    "status": "experimental",
+    "default_enabled": false,
+    "activation_contract": "Extension Manager removes the explicit OFF flag and appends --enable-prefix-caching only for an enabled MOD.",
+    "rollback_contract": "Disable the extension; the caller's --no-enable-prefix-caching baseline remains unchanged."
+  },
+  "scope": {
+    "mechanism": "vllm_builtin_prefix_cache_activation_policy",
+    "supported_workloads": ["requests with long repeated token prefixes"],
+    "out_of_scope": [
+      "novel prefix-cache algorithms",
+      "the Native Engine lease-safe bounded-LRU APC implementation",
+      "general performance claims"
+    ]
+  },
+  "evidence": {
+    "qualification": "candidate-unmeasured-experimental",
+    "performance_claims": []
+  }
+}
