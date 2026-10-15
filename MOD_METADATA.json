@@ -3,7 +3,7 @@
   "mod_id": "org.vllm-hust.stateaxis-prefix-cache-policy",
   "repository": "stateaxis-prefix-cache-policy",
   "display_name": "StateAxis Prefix Cache Policy",
-  "canonical_repository": "pending local candidate",
+  "canonical_repository": "https://github.com/vLLM-HUST/stateaxis-prefix-cache-policy",
   "responsibility": {
     "organization": "vLLM-HUST",
     "maintainers": [
@@ -28,7 +28,18 @@
     ]
   },
   "evidence": {
-    "qualification": "candidate-unmeasured-experimental",
-    "performance_claims": []
+    "qualification": "real-online-repeated-workload-scoped-positive-experimental",
+    "performance_claims": [
+      {
+        "workload": "materialized MMLU-Pro performance prompts",
+        "model": "Qwen3-8B",
+        "hardware": "1x Ascend 910B2",
+        "repetitions": 3,
+        "median_output_throughput_delta_pct": 11.002,
+        "median_mean_ttft_delta_pct": -15.394,
+        "median_mean_tpot_delta_pct": -5.676,
+        "boundary": "Experimental and workload-scoped; not Qwen3.5-35B, an accuracy result, a general claim, or official qualification."
+      }
+    ]
   }
 }

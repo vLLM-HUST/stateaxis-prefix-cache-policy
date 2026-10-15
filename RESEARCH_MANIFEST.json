@@ -9,11 +9,11 @@
   },
   "qualification": {
     "performance_qualified": false,
-    "evidence_label": "candidate-unmeasured-experimental",
-    "scope": "MMLU-Pro repeated-prefix screening on Qwen3-8B; no positive claim",
+    "evidence_label": "real-online-repeated-workload-scoped-positive-experimental",
+    "scope": "Three matched alternating-order MMLU-Pro performance pairs on Qwen3-8B and one Ascend 910B2",
     "blockers": [
-      "matched ON/OFF repetitions are not complete",
-      "the official Qwen3.5-35B-A3B TP2 profile is not runnable under the current one-device-per-owner lease"
+      "official Qwen3.5-35B-A3B TP2 confirmation is pending",
+      "deterministic output exactness comparison is pending"
     ]
   },
   "effect_metrics": [
