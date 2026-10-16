@@ -1,7 +1,7 @@
 {
   "schema_version": "stateaxis-research-mod/v1",
   "mod_id": "org.vllm-hust.stateaxis-prefix-cache-policy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "mechanism": {
     "name": "ecpa-owned-vllm-prefix-cache-activation",
     "enable_prefix_caching": true,
@@ -10,9 +10,9 @@
   "qualification": {
     "performance_qualified": false,
     "evidence_label": "real-online-repeated-workload-scoped-positive-experimental",
-    "scope": "Three matched alternating-order MMLU-Pro performance pairs on Qwen3-8B and one Ascend 910B2",
+    "scope": "Three matched alternating-order MMLU-Pro performance pairs on Qwen3-8B and one Ascend 910B2; Qwen3.5-35B-A3B TP2 MMLU-Pro recorded as a zero-eligible-block boundary",
     "blockers": [
-      "official Qwen3.5-35B-A3B TP2 confirmation is pending",
+      "a representative Qwen3.5-35B-A3B workload with repeated prefixes of at least one 2048-token aligned page is pending",
       "deterministic output exactness comparison is pending"
     ]
   },

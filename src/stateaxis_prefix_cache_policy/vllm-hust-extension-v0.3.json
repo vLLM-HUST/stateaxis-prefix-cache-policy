@@ -1,12 +1,12 @@
 {
   "schema_version": "0.3-experimental",
   "extension_id": "org.vllm-hust.stateaxis-prefix-cache-policy",
-  "extension_version": "0.1.0",
+  "extension_version": "0.1.1",
   "kind": "scheduler_policy",
   "host": {
     "provider": "vllm",
     "name": "vllm",
-    "version_range": ">=0.23,<0.24",
+    "version_range": ">=0.23,<0.26",
     "api_range": null
   },
   "runtime": {

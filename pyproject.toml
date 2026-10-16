@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "stateaxis-prefix-cache-policy"
-version = "0.1.0"
+version = "0.1.1"
 description = "ECPA-owned vLLM prefix-cache activation policy for repeated-prefix workloads"
 readme = "README.md"
 requires-python = ">=3.10"

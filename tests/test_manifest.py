@@ -24,3 +24,20 @@ def test_metadata_separates_native_engine_apc() -> None:
     assert "the Native Engine lease-safe bounded-LRU APC implementation" in (
         metadata["scope"]["out_of_scope"]
     )
+
+
+def test_qwen35_boundary_rejects_zero_hit_speedup() -> None:
+    root = Path(stateaxis_prefix_cache_policy.__file__).parents[2]
+    result = json.loads(
+        (
+            root
+            / "evidence"
+            / "mmlu-pro-qwen3.5-35b-boundary-20261016"
+            / "RESULT.json"
+        ).read_text()
+    )
+    assert result["eligibility_audit"]["optimistic_sequential_cache_simulation"]["hit_tokens"] == 0
+    on_arm = result["successful_bracket"][1]
+    assert on_arm["local_cache_query_tokens"] > 0
+    assert on_arm["local_cache_hit_tokens"] == 0
+    assert result["interpretation"]["causal_result"].startswith("no effect")
