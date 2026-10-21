@@ -1,4 +1,5 @@
 import json
+import runpy
 from pathlib import Path
 
 from vllm_hust_ext.manifest import activation_blocker, load_manifest
@@ -21,22 +22,25 @@ def test_metadata_separates_native_engine_apc() -> None:
     root = Path(stateaxis_prefix_cache_policy.__file__).parents[2]
     metadata = json.loads((root / "MOD_METADATA.json").read_text())
     assert metadata["lifecycle"]["default_enabled"] is False
-    assert "the Native Engine lease-safe bounded-LRU APC implementation" in (
-        metadata["scope"]["out_of_scope"]
+    assert (
+        "the Native Engine lease-safe bounded-LRU APC implementation"
+        in (metadata["scope"]["out_of_scope"])
     )
 
 
-def test_qwen35_boundary_rejects_zero_hit_speedup() -> None:
+def test_qwen35_boundary_rejects_zero_hit_speedup(tmp_path) -> None:
     root = Path(stateaxis_prefix_cache_policy.__file__).parents[2]
-    result = json.loads(
-        (
-            root
-            / "evidence"
-            / "mmlu-pro-qwen3.5-35b-boundary-20261016"
-            / "RESULT.json"
-        ).read_text()
+    source = "evidence/mmlu-pro-qwen3.5-35b-boundary-20261016/RESULT.json"
+    fetch = runpy.run_path(str(root / "tools/benchmark_evidence.py"))["fetch"]
+    cache = tmp_path / "originals"
+    fetch(cache, [source])
+    result = json.loads((cache / source).read_text())
+    assert (
+        result["eligibility_audit"]["optimistic_sequential_cache_simulation"][
+            "hit_tokens"
+        ]
+        == 0
     )
-    assert result["eligibility_audit"]["optimistic_sequential_cache_simulation"]["hit_tokens"] == 0
     on_arm = result["successful_bracket"][1]
     assert on_arm["local_cache_query_tokens"] > 0
     assert on_arm["local_cache_hit_tokens"] == 0
